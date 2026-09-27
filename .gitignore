@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Node / Playwright
+node_modules/
+*.log
+
+# Git
+.git/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+Thumbs.db
