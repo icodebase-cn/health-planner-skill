@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>杂志长图</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Noto+Sans+SC:wght@300;400;600&family=Fira+Code:wght@400&display=swap');
+
+  :root {
+    --BASESIZE: 34px;
+    --LINEHEIGHT: 2.0;
+    --BGCOLOR: #FAFAF8;
+    --TEXTCOLOR: #333333;
+    --TEXTHARD: #1a1a1a;
+    --MUTED: #888888;
+    --BORDER: #e8e6e0;
+    --SURFACE: #f2efe9;
+    --CANVAS_W: 1080px;
+    --PAD_H: calc(var(--BASESIZE) * 2.0);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: var(--CANVAS_W);
+    background: var(--BGCOLOR);
+    font-family: 'Noto Serif SC', serif;
+    padding: 0 var(--PAD_H) calc(var(--BASESIZE) * 2.4);
+    font-size: var(--BASESIZE);
+    line-height: var(--LINEHEIGHT);
+    color: var(--TEXTCOLOR);
+  }
+
+  .header {
+    padding-top: calc(var(--BASESIZE) * 1.65);
+    margin-bottom: calc(var(--BASESIZE) * 1.4);
+  }
+
+  .tag {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: calc(var(--BASESIZE) * 0.32);
+    font-weight: 400;
+    color: #666666;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: calc(var(--BASESIZE) * 0.6);
+  }
+
+  h1 {
+    font-size: calc(var(--BASESIZE) * 1.333 * 1.333 * 1.333);
+    font-weight: 600;
+    color: var(--TEXTHARD);
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+    margin-bottom: calc(var(--BASESIZE) * 0.24);
+  }
+
+  h2 {
+    font-size: calc(var(--BASESIZE) * 1.333 * 1.333);
+    font-weight: 600;
+    color: var(--TEXTHARD);
+    line-height: 1.4;
+    margin-bottom: calc(var(--BASESIZE) * 0.71);
+  }
+
+  h3 {
+    font-size: calc(var(--BASESIZE) * 1.333);
+    font-weight: 600;
+    color: var(--TEXTHARD);
+    line-height: 1.5;
+    margin-bottom: calc(var(--BASESIZE) * 0.59);
+  }
+
+  p {
+    font-size: var(--BASESIZE);
+    line-height: var(--LINEHEIGHT);
+    color: var(--TEXTCOLOR);
+    margin-bottom: calc(var(--BASESIZE) * 0.71);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+
+  .section { margin-bottom: calc(var(--BASESIZE) * 1.9); }
+
+  blockquote {
+    border-left: 2px solid #bbbbbb;
+    padding: calc(var(--BASESIZE) * 0.47) calc(var(--BASESIZE) * 0.71);
+    margin: calc(var(--BASESIZE) * 0.47) 0 calc(var(--BASESIZE) * 0.82);
+  }
+
+  blockquote p {
+    font-size: calc(var(--BASESIZE) * 0.65);
+    line-height: 1.9;
+    color: var(--MUTED);
+    margin-bottom: 0;
+    font-style: italic;
+  }
+
+  .highlight {
+    font-size: var(--BASESIZE);
+    font-weight: 600;
+    color: var(--TEXTHARD);
+    line-height: var(--LINEHEIGHT);
+    margin: calc(var(--BASESIZE) * 0.71) 0;
+    padding: calc(var(--BASESIZE) * 0.71) 0;
+    border-top: 1px solid var(--BORDER);
+    border-bottom: 1px solid var(--BORDER);
+    letter-spacing: 0.01em;
+  }
+
+  pre {
+    background: var(--SURFACE);
+    border: 1px solid var(--BORDER);
+    border-left: 3px solid var(--BORDER);
+    padding: calc(var(--BASESIZE) * 0.59) calc(var(--BASESIZE) * 0.71);
+    margin: calc(var(--BASESIZE) * 0.47) 0 calc(var(--BASESIZE) * 0.94);
+    overflow-x: auto;
+  }
+
+  pre code {
+    font-family: 'Fira Code', monospace;
+    font-size: calc(var(--BASESIZE) * 0.59);
+    background: none;
+    padding: 0;
+    line-height: 1.8;
+    color: var(--TEXTHARD);
+  }
+
+  ul, ol {
+    margin: calc(var(--BASESIZE) * 0.47) 0 calc(var(--BASESIZE) * 0.82);
+    padding-left: 1.5em;
+  }
+
+  li {
+    font-size: var(--BASESIZE);
+    line-height: var(--LINEHEIGHT);
+    color: var(--TEXTCOLOR);
+    margin-bottom: calc(var(--BASESIZE) * 0.35);
+    font-weight: 300;
+  }
+
+  ul li::marker { color: var(--TEXTHARD); }
+  ol li::marker { color: var(--TEXTHARD); font-weight: 600; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: calc(var(--BASESIZE) * 0.71) 0 calc(var(--BASESIZE) * 0.94);
+    font-size: calc(var(--BASESIZE) * 0.65);
+  }
+
+  th {
+    background: var(--TEXTHARD);
+    color: #ffffff;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: calc(var(--BASESIZE) * 0.53);
+    font-weight: 600;
+    text-align: left;
+    padding: calc(var(--BASESIZE) * 0.35) calc(var(--BASESIZE) * 0.47);
+    letter-spacing: 0.05em;
+  }
+
+  td {
+    border-bottom: 1px solid var(--BORDER);
+    padding: calc(var(--BASESIZE) * 0.35) calc(var(--BASESIZE) * 0.47);
+    color: var(--TEXTCOLOR);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  tr:nth-child(even) td { background: var(--SURFACE); }
+
+  .visual-break {
+    width: 100%;
+    height: 1px;
+    background: var(--BORDER);
+    margin: calc(var(--BASESIZE) * 1.9) 0;
+  }
+
+  .footer {
+    border-top: 1px solid var(--BORDER);
+    padding-top: calc(var(--BASESIZE) * 0.71);
+    margin-top: calc(var(--BASESIZE) * 0.94);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .source-tag {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: calc(var(--BASESIZE) * 0.32);
+    color: var(--MUTED);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="tag">设计理论</div>
+  <h1>CSS 排版设计的七个原则</h1>
+</div>
+
+<div class="section">
+  <h2>一、间距即意义</h2>
+  <p>间距是信息分组的视觉语言。核心逻辑：同组内间距小于跨组间距。这是格式塔心理学的基本规律——彼此靠近的元素被视为一组。</p>
+  <p>标题的上边距应该大于下边距，因为标题在语义上属于其后的段落。</p>
+
+  <blockquote>
+    <p>整体偏好宽松节奏；艺术化处理时可主动压缩乃至负间距，须服务于明确的风格意图。</p>
+  </blockquote>
+
+  <h3>行高选择</h3>
+  <p>不同场景需要不同的行高策略：</p>
+  <ul>
+    <li>日常阅读：1.8–2.0 倍行高</li>
+    <li>诗歌/出版物：2.0–2.5 倍行高</li>
+    <li>技术文档：1.6–1.7 倍行高</li>
+  </ul>
+
+  <div class="visual-break"></div>
+</div>
+
+<div class="section">
+  <h2>二、视觉层次</h2>
+  <p>每个元素的视觉比重必须匹配其信息层级。实现维度有五个：字号、字重、颜色、间距、装饰。</p>
+  <p>强调只在克制使用时有效。大量的加粗等于没有强调。</p>
+
+  <h3>标题层级</h3>
+  <p>不同层级之间视觉比重差异须清晰可感。至少用两个维度来区分。</p>
+
+  <table>
+    <tr><th>维度</th><th>作用</th><th>示例</th></tr>
+    <tr><td>字号</td><td>最直接的层级信号</td><td>H1 = 正文 × 2.37</td></tr>
+    <tr><td>字重</td><td>在同一字号下的强调</td><td>正文 300 / 标题 600</td></tr>
+    <tr><td>颜色</td><td>灰度区分信息权重</td><td>正文 #333 / 标签 #888</td></tr>
+  </table>
+
+  <div class="visual-break"></div>
+</div>
+
+<div class="section">
+  <h2>三、数学秩序</h2>
+  <p>间距和尺寸之间应有内在的数学关系，而非随机取值。</p>
+
+  <h3>等比数列：视觉张力的递进</h3>
+  <p>字号层级推荐用 Perfect Fourth（1.333）作为基准比例：</p>
+
+<pre><code>:root {
+  --BASESIZE: 34px;
+  --H1: calc(var(--BASESIZE) * 1.333 * 1.333 * 1.333);  /* ≈ 60px */
+  --H2: calc(var(--BASESIZE) * 1.333 * 1.333);           /* ≈ 45px */
+  --H3: calc(var(--BASESIZE) * 1.333);                    /* ≈ 34px */
+  --BODY: var(--BASESIZE);                                /* 34px */
+}</code></pre>
+
+  <p>避免间距出现无关联的随机数（如 17、23、37 混用），选定基准值后其他值统一推导。</p>
+
+  <div class="highlight">
+    最好的排版是看不见的排版——读者感受到的是信息，不是设计。
+  </div>
+</div>
+
+<div class="footer">
+  <span class="source-tag">DesignTheory</span>
+</div>
+
+</body>
+</html>

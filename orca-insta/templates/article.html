@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文章模式</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;600&family=Fira+Code:wght@400&display=swap');
+
+  :root {
+    --BASESIZE: 34px;
+    --LINEHEIGHT: 2.2;
+    --BGCOLOR: #fffdf8;
+    --TEXTCOLOR: #3a3020;
+    --TEXTHARD: #1a1008;
+    --MUTED: #7a7060;
+    --BORDER: #d8cfc0;
+    --SURFACE: #f3ede0;
+    --CANVAS_W: 1080px;
+    --PAD_H: calc(var(--BASESIZE) * 1.4);
+    --CONTENT_W: calc(var(--CANVAS_W) - var(--PAD_H) * 2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: var(--CANVAS_W);
+    background: var(--BGCOLOR);
+    font-family: 'Noto Sans SC', 'PingFang SC', sans-serif;
+    font-size: var(--BASESIZE);
+    line-height: var(--LINEHEIGHT);
+    color: var(--TEXTCOLOR);
+  }
+
+  .hero-img {
+    width: var(--CANVAS_W);
+    height: calc(var(--BASESIZE) * 12);
+    object-fit: cover;
+    display: block;
+    background: #e0d8c8;
+  }
+
+  .inner {
+    max-width: var(--CONTENT_W);
+    padding: 0 var(--PAD_H) calc(var(--BASESIZE) * 2.4);
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    font-size: calc(var(--BASESIZE) * 0.35);
+    font-weight: 400;
+    color: var(--MUTED);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: calc(var(--BASESIZE) * 2.8);
+    margin-bottom: calc(var(--BASESIZE) * 0.47);
+  }
+
+  h1 {
+    font-size: calc(var(--BASESIZE) * 1.333 * 1.333 * 1.333);
+    font-weight: 600;
+    color: var(--TEXTHARD);
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+    margin-bottom: calc(var(--BASESIZE) * 0.35);
+    border-bottom: 2px solid var(--TEXTHARD);
+    padding-bottom: calc(var(--BASESIZE) * 0.59);
+  }
+
+  h2 {
+    font-size: calc(var(--BASESIZE) * 1.333 * 1.333);
+    font-weight: 600;
+    color: var(--TEXTHARD);
+    border-left: 3px solid var(--TEXTHARD);
+    padding-left: calc(var(--BASESIZE) * 0.47);
+    margin: calc(var(--BASESIZE) * 1.88) 0 calc(var(--BASESIZE) * 0.71);
+    line-height: 1.4;
+  }
+
+  h3 {
+    font-size: calc(var(--BASESIZE) * 1.333);
+    font-weight: 600;
+    color: var(--TEXTHARD);
+    margin: calc(var(--BASESIZE) * 1.18) 0 calc(var(--BASESIZE) * 0.47);
+    line-height: 1.5;
+  }
+
+  h4 {
+    font-size: var(--BASESIZE);
+    font-weight: 600;
+    color: var(--TEXTHARD);
+    margin: calc(var(--BASESIZE) * 0.94) 0 calc(var(--BASESIZE) * 0.35);
+  }
+
+  h5 {
+    font-size: calc(var(--BASESIZE) * 0.82);
+    font-weight: 600;
+    color: var(--MUTED);
+    margin: calc(var(--BASESIZE) * 0.82) 0 calc(var(--BASESIZE) * 0.29);
+  }
+
+  h6 {
+    font-size: calc(var(--BASESIZE) * 0.65);
+    font-weight: 400;
+    color: var(--MUTED);
+    margin: calc(var(--BASESIZE) * 0.71) 0 calc(var(--BASESIZE) * 0.24);
+    font-style: italic;
+  }
+
+  p {
+    font-size: var(--BASESIZE);
+    line-height: var(--LINEHEIGHT);
+    color: var(--TEXTCOLOR);
+    margin-bottom: calc(var(--BASESIZE) * 0.82);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+
+  strong { font-weight: 600; }
+  em { font-style: italic; }
+  u { text-decoration: underline; }
+  del { text-decoration: line-through; color: #888888; }
+
+  code {
+    font-family: 'Fira Code', monospace;
+    font-size: calc(var(--BASESIZE) * 0.76);
+    background: var(--SURFACE);
+    padding: 2px 6px;
+    border-radius: 2px;
+  }
+
+  .lead {
+    font-size: calc(var(--BASESIZE) * 1.06);
+    line-height: 1.85;
+    color: var(--TEXTHARD);
+    font-weight: 300;
+    margin-bottom: calc(var(--BASESIZE) * 1.18);
+  }
+
+  blockquote {
+    border-left: 3px solid var(--TEXTHARD);
+    padding: calc(var(--BASESIZE) * 0.59) calc(var(--BASESIZE) * 0.82);
+    margin: calc(var(--BASESIZE) * 1.18) 0;
+  }
+
+  blockquote p {
+    font-size: calc(var(--BASESIZE) * 0.82);
+    line-height: 2.0;
+    color: #555555;
+    margin-bottom: 0;
+    font-style: italic;
+  }
+
+  pre {
+    background: var(--SURFACE);
+    border: 1px solid var(--TEXTHARD);
+    border-left: 3px solid var(--TEXTHARD);
+    padding: calc(var(--BASESIZE) * 0.59) calc(var(--BASESIZE) * 0.71);
+    margin: calc(var(--BASESIZE) * 0.71) 0 calc(var(--BASESIZE) * 0.94);
+    overflow-x: auto;
+  }
+
+  pre code {
+    font-size: calc(var(--BASESIZE) * 0.71);
+    background: none;
+    padding: 0;
+    line-height: 1.8;
+    color: var(--TEXTHARD);
+  }
+
+  ul, ol {
+    margin: calc(var(--BASESIZE) * 0.47) 0 calc(var(--BASESIZE) * 0.82);
+    padding-left: 1.5em;
+  }
+
+  li {
+    font-size: var(--BASESIZE);
+    line-height: var(--LINEHEIGHT);
+    color: var(--TEXTCOLOR);
+    margin-bottom: calc(var(--BASESIZE) * 0.47);
+    font-weight: 300;
+  }
+
+  ul li::marker { color: var(--TEXTHARD); }
+  ol li::marker { color: var(--TEXTHARD); font-weight: 600; }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--BORDER);
+    margin: calc(var(--BASESIZE) * 1.88) 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: calc(var(--BASESIZE) * 0.71) 0 calc(var(--BASESIZE) * 0.94);
+    font-size: calc(var(--BASESIZE) * 0.71);
+  }
+
+  th {
+    background: var(--TEXTHARD);
+    color: var(--BGCOLOR);
+    font-size: calc(var(--BASESIZE) * 0.59);
+    font-weight: 600;
+    text-align: left;
+    padding: calc(var(--BASESIZE) * 0.35) calc(var(--BASESIZE) * 0.47);
+    letter-spacing: 0.05em;
+  }
+
+  td {
+    border-bottom: 1px solid var(--BORDER);
+    padding: calc(var(--BASESIZE) * 0.35) calc(var(--BASESIZE) * 0.47);
+    color: var(--TEXTCOLOR);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  tr:nth-child(even) td { background: var(--SURFACE); }
+
+  .bottom-bar {
+    max-width: var(--CONTENT_W);
+    padding: 0 var(--PAD_H) calc(var(--BASESIZE) * 1.4);
+    margin: 0 auto;
+    border-top: 1px solid var(--BORDER);
+    padding-top: calc(var(--BASESIZE) * 0.59);
+  }
+
+  .source-tag {
+    font-size: calc(var(--BASESIZE) * 0.32);
+    color: var(--MUTED);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero-img"></div>
+
+<div class="inner">
+
+  <div class="eyebrow">设计理论</div>
+
+  <h1>现代 CSS 排版设计完全指南</h1>
+
+  <p class="lead">本文介绍现代 CSS 排版设计的七个核心原则，涵盖从基础到进阶的全部知识点。</p>
+
+  <h2>第一原则：间距即意义</h2>
+
+  <p>间距是信息分组的视觉语言。核心逻辑：<strong>同组内间距必须小于跨组间距</strong>，这是格式塔心理学的基本规律。</p>
+
+  <h3>行高选择</h3>
+
+  <p>不同场景需要不同的行高策略。下面的表格给出了推荐值：</p>
+
+  <table>
+    <tr><th>场景</th><th>推荐行高</th><th>说明</th></tr>
+    <tr><td>日常阅读</td><td>1.8–2.0</td><td>最常见的舒适区间</td></tr>
+    <tr><td>诗歌/出版物</td><td>2.0–2.5</td><td>留白营造阅读节奏</td></tr>
+    <tr><td>技术文档</td><td>1.6–1.7</td><td>信息密度高，需紧凑</td></tr>
+  </table>
+
+  <h2>第二原则：视觉层次</h2>
+
+  <p>每个元素的视觉比重必须匹配其信息层级。实现维度有五个：<em>字号、字重、颜色、间距、装饰</em>。</p>
+
+  <h4>标题层级</h4>
+  <p>不同层级之间视觉比重差异须清晰可感，至少用两个维度来区分。</p>
+
+  <h5>标题层级设计检查</h5>
+  <p>设计时应自问：H1 和 H2 的区别是否只用了一种手段？</p>
+
+  <h6>设计检查提醒</h6>
+  <p>H6 通常用于版权信息、注释等次要元数据。</p>
+
+  <blockquote>
+    <p>最好的设计是看不见的设计。读者感受到的是信息，不是设计。</p>
+  </blockquote>
+
+  <h2>第三原则：数学秩序</h2>
+
+  <p>间距和尺寸之间应有内在的数学关系，而非随机取值。</p>
+
+  <h3>等比数列</h3>
+  <p>字号层级推荐用 Perfect Fourth（1.333）作为基准比例：</p>
+
+<pre><code>:root {
+  --BASESIZE: 34px;
+  --H1: calc(var(--BASESIZE) * 1.333 * 1.333 * 1.333);
+  --H2: calc(var(--BASESIZE) * 1.333 * 1.333);
+  --H3: calc(var(--BASESIZE) * 1.333);
+}</code></pre>
+
+  <h2>第四原则：配色系统</h2>
+
+  <p>颜色角色定义清晰是配色系统的基础。</p>
+
+  <h3>颜色角色</h3>
+  <p>六个核心角色：<code>bg</code>、<code>surface</code>、<code>text</code>、<code>muted</code>、<code>border</code>、<code>accent</code>。</p>
+
+  <p>灰色规则：绝大多数场景用 <strong>1–3% 饱和度</strong>的深灰，非纯黑。</p>
+
+  <h2>第五原则：元素渲染</h2>
+
+  <h3>列表</h3>
+  <p>列表嵌套超过 3 层时，推荐字号随层级降档。</p>
+
+  <ul>
+    <li>第一层：Design Token 管理</li>
+    <li>第二层：主题切换
+      <ul>
+        <li>深色模式</li>
+        <li>高对比模式</li>
+      </ul>
+    </li>
+    <li>第三层：响应式断点</li>
+  </ul>
+
+  <h3>代码块</h3>
+  <p>代码块应有独立深色背景，与正文区域有明显区分。</p>
+
+  <hr>
+
+  <h2>总结</h2>
+
+  <p>排版设计六个原则：间距、层次、数学、配色、元素、图片。<del>记住这六点就够了。</del></p>
+
+  <p>掌握这些原则，你已经超过了大多数前端开发者。</p>
+
+</div>
+
+<div class="bottom-bar">
+  <span class="source-tag">DesignTheory</span>
+</div>
+
+</body>
+</html>

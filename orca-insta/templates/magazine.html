@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>杂志分页</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Noto+Sans+SC:wght@300;400;600&display=swap');
+
+  :root {
+    --BASESIZE: 34px;
+    --LINEHEIGHT: 2.0;
+    --BGCOLOR: #FAFAF8;
+    --TEXTCOLOR: #333333;
+    --TEXTHARD: #1a1a1a;
+    --MUTED: #888888;
+    --BORDER: #e8e6e0;
+    --SURFACE: #f2efe9;
+    --CANVAS_W: 1080px;
+    --CANVAS_H: 1440px;
+    --PAD_H: calc(var(--BASESIZE) * 2.0);
+    --PAD_V: calc(var(--BASESIZE) * 1.4);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: var(--CANVAS_W);
+    min-height: var(--CANVAS_H);
+    background: var(--BGCOLOR);
+    font-family: 'Noto Serif SC', serif;
+    display: flex;
+    flex-direction: column;
+    padding: var(--PAD_V) var(--PAD_H) calc(var(--BASESIZE) * 1.4);
+    font-size: var(--BASESIZE);
+    line-height: var(--LINEHEIGHT);
+    color: var(--TEXTCOLOR);
+  }
+
+  .header { flex-shrink: 0; }
+
+  .tag {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: calc(var(--BASESIZE) * 0.32);
+    font-weight: 400;
+    color: #aaaaaa;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: calc(var(--BASESIZE) * 0.6);
+  }
+
+  h1 {
+    font-size: calc(var(--BASESIZE) * 1.333 * 1.333 * 1.333);
+    font-weight: 600;
+    color: var(--TEXTHARD);
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+    margin-bottom: calc(var(--BASESIZE) * 0.24);
+  }
+
+  h2 {
+    font-size: calc(var(--BASESIZE) * 1.333 * 1.333);
+    font-weight: 400;
+    color: var(--MUTED);
+    line-height: 1.6;
+    margin-top: calc(var(--BASESIZE) * 0.35);
+    margin-bottom: calc(var(--BASESIZE) * 0.94);
+  }
+
+  .divider-h {
+    width: 100%;
+    height: 1px;
+    background: var(--BORDER);
+    margin-bottom: calc(var(--BASESIZE) * 0.94);
+  }
+
+  .body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+  }
+
+  p {
+    font-size: var(--BASESIZE);
+    line-height: var(--LINEHEIGHT);
+    color: var(--TEXTCOLOR);
+    margin-bottom: calc(var(--BASESIZE) * 0.59);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  blockquote {
+    background: var(--SURFACE);
+    border-left: 2px solid #bbbbbb;
+    padding: calc(var(--BASESIZE) * 0.47) calc(var(--BASESIZE) * 0.59);
+    margin: calc(var(--BASESIZE) * 0.24) 0 calc(var(--BASESIZE) * 0.71);
+  }
+
+  blockquote p {
+    font-size: calc(var(--BASESIZE) * 0.53);
+    line-height: 1.9;
+    color: #555555;
+    margin-bottom: 0;
+    font-style: normal;
+  }
+
+  .highlight {
+    font-size: calc(var(--BASESIZE) * 0.65);
+    font-weight: 600;
+    color: var(--TEXTHARD);
+    line-height: var(--LINEHEIGHT);
+    margin: calc(var(--BASESIZE) * 0.47) 0 calc(var(--BASESIZE) * 0.71);
+    padding: calc(var(--BASESIZE) * 0.59) 0;
+    border-top: 1px solid var(--BORDER);
+    border-bottom: 1px solid var(--BORDER);
+    letter-spacing: 0.02em;
+  }
+
+  .footer {
+    margin-top: auto;
+    padding-top: calc(var(--BASESIZE) * 0.71);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .source-tag {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: calc(var(--BASESIZE) * 0.29);
+    color: #cccccc;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .page-num {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: calc(var(--BASESIZE) * 0.26);
+    color: #dddddd;
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="tag">建筑与城市</div>
+  <h1>沉默的混凝土</h1>
+  <h2>现代主义建筑的精神困境</h2>
+  <div class="divider-h"></div>
+</div>
+
+<div class="body">
+  <p>混凝土在阳光下呈现出一种近乎黑色的灰，这是它的本来面目。粗野主义的建筑师们相信这种材质能表达某种真诚，但真诚有时候也是一种傲慢。</p>
+
+  <blockquote>
+    <p>建筑是凝固的思想。当思想变得沉重，混凝土便成了唯一的选择。</p>
+  </blockquote>
+
+  <p>如今这些建筑正在老去，它们的裂缝比任何宣言都更诚实。</p>
+
+  <div class="highlight">
+    沉默不是没有话要说，而是所有的话都已经说完了。
+  </div>
+</div>
+
+<div class="footer">
+  <span class="source-tag">Orca Weekly</span>
+  <span class="page-num">01</span>
+</div>
+
+</body>
+</html>

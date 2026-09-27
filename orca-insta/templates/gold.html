@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金句卡片模板</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Lora:ital,wght@0,400;1,400&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px;
+    background: #fffdf9;
+    font-family: 'Noto Serif SC', serif;
+    min-height: 1440px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-wrap {
+    width: 1080px;
+    height: 607px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .hero-wrap img {
+    width: 1080px;
+    height: 607px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  .content {
+    width: 100%;
+    padding: 80px 120px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .quote-zh {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 2.2;
+    text-align: center;
+    color: #2a2a2a;
+    margin-bottom: 48px;
+    letter-spacing: 0.04em;
+  }
+  .divider {
+    width: 48px;
+    height: 1px;
+    background: #c8c0b4;
+    margin: 0 auto 48px;
+  }
+  .quote-en {
+    font-family: 'Lora', serif;
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 2.2;
+    text-align: center;
+    color: #666666;
+    margin-bottom: 56px;
+    letter-spacing: 0.02em;
+  }
+  .source {
+    font-size: 13px;
+    color: #aaaaaa;
+    text-align: center;
+    letter-spacing: 0.12em;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero-wrap">
+  <img src="{{HERO_IMG}}" alt="hero">
+</div>
+
+<div class="content">
+  <p class="quote-zh">{{中文金句（已断句）}}</p>
+  <div class="divider"></div>
+  <p class="quote-en">{{英文翻译}}</p>
+  <p class="source">{{来源}}</p>
+</div>
+
+</body>
+</html>

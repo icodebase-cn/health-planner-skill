@@ -1,0 +1,67 @@
+name: Notify upstream consumers
+
+# 当 orca-insta 发布新版本后，手动触发此 workflow
+# → 会向所有引用了 orca-insta 的仓库（dietary-planner-skill）发送通知
+#
+# 使用方式：
+# 1. 在 orca-insta 仓库 → Actions → Run workflow → Notify Upstream Consumers
+# 2. 填入新的 commit SHA（从 orca-insta 的 commit 历史获取）
+on:
+  workflow_dispatch:
+    inputs:
+      commit_sha:
+        description: '新的 orca-insta commit SHA（完整 40 位）'
+        required: true
+        type: string
+      commit_short:
+        description: '简短 commit 标识（如 abc1234）'
+        required: false
+        type: string
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify dietary-planner-skill
+        env:
+          # 需要在 orca-insta 仓库的 Settings → Secrets 配置 DIETARY_PLANNER_TOKEN
+          # Token 需要有 repo scope，可以创建 Fine-grained PAT
+          # 权限：dietary-planner-skill 仓库 → Contents write
+          GH_TOKEN: ${{ secrets.DIETARY_PLANNER_TOKEN }}
+          ORCA_REPO: ${{ github.repository }}
+          COMMIT_SHA: ${{ inputs.commit_sha }}
+          COMMIT_SHORT: ${{ inputs.commit_short || inputs.commit_sha }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "⚠️  DIETARY_PLANNER_TOKEN 未配置。"
+            echo "请在 orca-insta 仓库 Settings → Secrets 添加 PAT（需要 dietary-planner-skill 的 Contents write 权限）。"
+            echo "也可以手动触发：dietary-planner-skill → Actions → Sync orca-insta submodule → Run workflow"
+            exit 1
+          fi
+
+          # 触发 dietary-planner-skill 的 workflow dispatch
+          RESPONSE=$(gh api \
+            --method POST \
+            -H "Authorization: token $GH_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/pericn/dietary-planner-skill/actions/workflows/update-orca-insta-submodule.yml/dispatches \
+            -f event_type=orca-insta-update \
+            -f client_payload.commit_sha="$COMMIT_SHA" \
+            -f client_payload.commit_short="$COMMIT_SHORT" \
+            -f client_payload.triggered_by="${{ github.actor }}" \
+          )
+
+          echo "Response: $RESPONSE"
+          echo "✅ 已触发 dietary-planner-skill 的 submodule 更新 workflow"
+
+      - name: Fallback: print instructions
+        if: env.GH_TOKEN == ''
+        run: |
+          echo "=========================================="
+          echo "⚠️  PAT 未配置，跳过自动通知。"
+          echo ""
+          echo "请手动触发 dietary-planner-skill 的 workflow："
+          echo "https://github.com/pericn/dietary-planner-skill/actions/workflows/update-orca-insta-submodule.yml"
+          echo ""
+          echo "本次 commit SHA: ${{ inputs.commit_sha }}"
+          echo "=========================================="

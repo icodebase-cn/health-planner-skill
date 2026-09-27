@@ -2,7 +2,7 @@
 
 **AI 膳食规划系统** — 针对不同健康目标（减脂、慢病管理）生成精准营养方案，含食谱设计、营养分析、库存管理、可视化输出。
 
-专为不同健康目标（减脂、慢病管理等）设计，支持 OpenClaw / Coze 等 AI Agent 平台。
+专为不同健康目标（减脂、慢病管理等）设计，支持 AISet / OpenClaw 等 AI Agent 平台。
 
 ---
 
@@ -25,10 +25,10 @@
 health-planner-skill/
 ├── SKILL.md                              # 主技能文件（含完整说明）
 ├── orca-insta/                           # 图片生成 submodule
-│   ├── SKILL.md                         # orca-insta 视觉卡片生成
-│   ├── SPEC/                            # 设计规格文档
-│   ├── templates/magazine-long.html     # 杂志长图模板
-│   └── capture.js                       # Playwright 截图引擎
+│   ├── SKILL.md                          # orca-insta 视觉卡片生成
+│   ├── SPEC/                             # 设计规格文档
+│   ├── templates/magazine-long.html      # 杂志长图模板
+│   └── capture.js                        # Playwright 截图引擎
 ├── data/
 │   └── inventory.txt                     # 库存 + 人员档案（空模板）
 ├── tracking/
