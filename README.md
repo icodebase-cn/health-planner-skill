@@ -51,8 +51,13 @@ health-planner-skill/
 
 ### 安装 skill
 在聊天界面点击「专家技能」。
-输入：请帮我安装 https://github.com/pericn/orca-insta.git 和 https://github.com/icodebase-cn/health-planner-skill.git
 
+分别输入：
+```
+请帮我安装 https://github.com/pericn/orca-insta.git
+
+请帮我安装 https://github.com/icodebase-cn/health-planner-skill.git
+```
 ---
 
 ## 🔄 工作流程
